@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap')
+*
+  margin: 0
+  padding: 0
+  font-family: 'PT Sans', sans-serif
+
+.checkbox
+  -moz-appearance: none
+  -webkit-appearance: none
+  -o-appearance: none
+  outline: none
+  content: none
+  height: 16px
+  width: 16px
+  display: flex
+  align-items: center
+  cursor: url('../static/finger.svg'), default
+  &::before
+    content: ''
+    display: inline-block
+    width: 16px
+    height: 16px
+    border: 1px solid #C4C4C4
+    border-radius: 0
+    background-repeat: no-repeat
+    background-position: center center
+    //background-size: 50% 50%
+  &:checked:before
+    background-color: #FCE66F
+    background-image: url('../static/Vector.svg') !important
+    -webkit-background-size: 12px
+    -moz-background-size: 12px
+    -o-background-size: 12px
+    background-size: 12px
+  &:checked+label
+    color: #FF0D29
+
+
