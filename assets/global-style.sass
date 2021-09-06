@@ -12,9 +12,14 @@
   content: none
   height: 16px
   width: 16px
-  display: flex
-  align-items: center
   cursor: url('../static/finger.svg'), default
+  &+label
+    cursor: url('../static/finger.svg'), default
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
   &::before
     content: ''
     display: inline-block
@@ -24,7 +29,6 @@
     border-radius: 0
     background-repeat: no-repeat
     background-position: center center
-    //background-size: 50% 50%
   &:checked:before
     background-color: #FCE66F
     background-image: url('../static/Vector.svg') !important
@@ -32,7 +36,8 @@
     -moz-background-size: 12px
     -o-background-size: 12px
     background-size: 12px
-  &:checked+label
+  &:hover+label
     color: #FF0D29
 
-
+.v-menu__content
+  box-shadow: 0 20px 25px -5px rgba(26, 32, 44, 0.1), 0px 10px 10px -5px rgba(26, 32, 44, 0.04)!important

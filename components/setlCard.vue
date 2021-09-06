@@ -1,4 +1,5 @@
 <template>
+  <v-expand-transition>
   <div class="card">
     <div class="card__checkbox">
       <input class="checkbox" type="checkbox" v-model="check">
@@ -38,6 +39,7 @@
       </div>
     </div>
   </div>
+    </v-expand-transition>
 </template>
 
 <script>
@@ -97,6 +99,7 @@ export default {
     font-size: inherit
     line-height: 21px
     height: 42px
+    width: 225px
     &_add
       color: #9B9B9B
   &__right

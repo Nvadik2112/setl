@@ -1,7 +1,7 @@
 <template>
-  <div style="background-color: #F7F6F4">
+  <v-app style="background-color: #F7F6F4">
     <Nuxt />
-  </div>
+  </v-app>
 </template>
 <script>
 </script>

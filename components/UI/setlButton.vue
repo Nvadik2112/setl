@@ -35,6 +35,7 @@ export default {
       weight: 400
       size: 13px
     color: inherit
+    white-space: nowrap
   &__logo
     margin-left: 6px
     width: 24px

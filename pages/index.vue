@@ -5,19 +5,18 @@
         <img src="/input/search.svg" alt="поиск">
         <input type="text" placeholder="Введите ЖК / корпус / № квартиры / № паркинга">
       </div>
-      <div class="select">
-        <p c>Все статусы</p>
-      </div>
+      <setl-select @booked="setIsBooked" @sold="setIsSold" @active="setIsActive" />
+      <setl-button name="Очистить корзину" url="/button/x.svg" />
     </div>
     <div class="bar">
-      <input class="checkbox" type="checkbox" id="all" v-model="check">
+      <input class="checkbox checkbox_all" type="checkbox" id="all" v-model="check">
       <label class="checkbox__label-all" for="all">все</label>
       <div class="buttons">
         <setl-button v-for="item in listButton" :name="item.name" :url="item.url" />
       </div>
     </div>
     <div class="cards">
-      <setl-card v-for="item in list" :list-item="item" :check="check"/>
+      <setl-card v-for="item in listFilter" :list-item="item" :check="check"/>
     </div>
   </div>
 </template>
@@ -27,12 +26,16 @@ import setlButton from "../components/UI/setlButton";
 import SetlChip from "../components/UI/setlChip";
 import SetlStatus from "../components/UI/setlStatus";
 import SetlCard from "../components/setlCard";
+import SetlSelect from "../components/UI/setlSelect";
 export default {
   name: 'index',
-  components: {SetlCard, SetlStatus, SetlChip, setlButton},
+  components: {SetlSelect, SetlCard, SetlStatus, SetlChip, setlButton},
   data() {
     return {
       check: false,
+      isBooked: true,
+      isSold: true,
+      isActive: true,
       listButton: [
         {name: 'Сохранить', url: '/button/pdf.svg'},
         {name: 'Отправить', url: '/button/send.svg'},
@@ -68,6 +71,25 @@ export default {
           address: 'Лен. область, Всеволожский район, <br>д. Кудрово, ул. Столичная, д. 5, к. 1',
           plan: '/image.svg', date: '21/11/2020'}
       ]
+    }
+  },
+  computed: {
+    listFilter() {
+      const arr = this.list.filter(elem => (elem.status === 'sold' && this.isSold)
+      || (elem.status === 'booked' && this.isBooked) ||
+        ((elem.status === 'individual' || elem.status === 'legal') && this.isActive))
+      return arr
+    }
+  },
+  methods: {
+    setIsBooked() {
+      this.isBooked = !this.isBooked
+    },
+    setIsSold() {
+      this.isSold = !this.isSold
+    },
+    setIsActive() {
+      this.isActive = !this.isActive
     }
   }
 }
@@ -117,24 +139,18 @@ export default {
       line-height: 18px
       color: #9B9B9B
 .select
-  border: 1px solid gray
-  outline: none
-  -webkit-appearance: none
+  border: 1px solid #C4C4C4
   background: url('../static/input/ic_up.svg') no-repeat right 10px center
   background-size: 16px 15px
-  //&:after
-  //  content: "▼"
-  //  padding: 0 8px
-  //  font-size: 12px
-  //  position: absolute
-  //  right: 8px
-  //  top: 4px
-  //  z-index: 3
-  //  text-align: center
-  //  width: 10%
-  //  height: 100%
-  //  pointer-events: none
-  //  box-sizing: border-box
+  display: flex
+  align-items: center
+  padding-left: 15px
+  width: 190px
+  cursor: pointer
+  & p
+    line-height: 18px
+    font-size: 14px
+    margin-bottom: 0
 .main
   display: flex
   flex-direction: column
@@ -158,6 +174,9 @@ export default {
   &__container
     width: 411px
     height: fit-content
+.checkbox_all
+  display: flex
+  align-items: center
 .checkbox__label-all
   margin-left: 10px
   font:
@@ -169,5 +188,4 @@ export default {
   display: grid
   grid-column-gap: 10px
   grid-template-columns: repeat(3, 1fr)
-
 </style>
